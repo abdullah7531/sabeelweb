@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Product Showcase | Portfolio</title>
+    <style>
+      .showcase-container {
+        max-width: 1200px;
+        margin: 40px auto;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      }
+
+      .showcase-title {
+        text-align: center;
+        font-size: 32px;
+        font-weight: 700;
+        margin-bottom: 10px;
+        color: #2c3e50;
+      }
+
+      .showcase-subtitle {
+        text-align: center;
+        font-size: 18px;
+        color: #7f8c8d;
+        margin-bottom: 40px;
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .product-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+        margin-bottom: 50px;
+      }
+
+      .grid-item {
+        position: relative;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+        transition: transform 0.3s, box-shadow 0.3s;
+        aspect-ratio: 1 / 1;
+      }
+
+      .grid-item:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 12px 20px rgba(0, 0, 0, 0.12);
+      }
+
+      .grid-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+        transition: transform 0.5s ease;
+      }
+
+      .grid-item:hover .grid-image {
+        transform: scale(1.1);
+      }
+
+      .review-section {
+        background: #f8f9fa;
+        border-radius: 10px;
+        padding: 30px;
+        text-align: center;
+        max-width: 800px;
+        margin: 0 auto;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+      }
+
+      .review-title {
+        font-size: 24px;
+        font-weight: 600;
+        margin-bottom: 20px;
+        color: #2c3e50;
+      }
+
+      .review-text {
+        font-size: 18px;
+        line-height: 1.6;
+        color: #555;
+        margin-bottom: 20px;
+        font-style: italic;
+      }
+
+      .reviewer-info {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 15px;
+      }
+
+      .reviewer-avatar {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        overflow: hidden;
+      }
+
+      .reviewer-avatar img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .reviewer-details {
+        text-align: left;
+      }
+
+      .reviewer-name {
+        font-weight: 600;
+        color: #2c3e50;
+        margin-bottom: 5px;
+      }
+
+      .reviewer-role {
+        color: #7f8c8d;
+        font-size: 14px;
+      }
+
+      .rating {
+        color: #ffc107;
+        font-size: 20px;
+        margin-top: 10px;
+      }
+
+      @media (max-width: 768px) {
+        .product-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+
+      @media (max-width: 480px) {
+        .product-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .showcase-container {
+          padding: 20px;
+        }
+      }
+      /* Image lightbox (popup) styles */
+      .grid-image {
+        cursor: zoom-in;
+      }
+
+      .lightbox-overlay {
+        position: fixed;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(0, 0, 0, 0.85);
+        padding: 20px;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 200ms ease, visibility 200ms ease;
+        z-index: 9999;
+      }
+
+      .lightbox-overlay.open {
+        opacity: 1;
+        visibility: visible;
+      }
+
+      .lightbox-image {
+        max-width: 96%;
+        max-height: 92%;
+        border-radius: 8px;
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+        display: block;
+      }
+
+      .lightbox-close {
+        position: absolute;
+        top: 18px;
+        right: 18px;
+        background: transparent;
+        border: none;
+        color: #fff;
+        font-size: 34px;
+        line-height: 1;
+        cursor: pointer;
+        padding: 6px 10px;
+      }
+      .visit-site-btn {
+        position: fixed;
+        top: 18px;
+        right: 18px;
+        background: hsla(233, 98%, 62%, 0.848); /* sky blue */
+        color: #fff;
+        border: none;
+        padding: 10px 14px;
+        border-radius: 25px;
+        font-weight: 600;
+        box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+        cursor: pointer;
+        z-index: 9999;
+      }
+
+      /* Slightly smaller on small screens */
+      @media (max-width: 480px) {
+        .visit-site-btn {
+          top: 12px;
+          right: 12px;
+          padding: 8px 10px;
+          font-size: 14px;
+        }
+      }
+      .contact-btn {
+        padding: 12px 20px;
+        border-radius: 25px;
+        color: white;
+        display: flex;
+        font-size: 18px;
+        text-decoration: none;
+        transition: all 0.6s ease;
+      }
+
+      .contact-btn:hover {
+        background-color: white;
+        color: #111;
+        cursor: pointer;
+        transform: translateY(-2px);
+        border: 1px solid;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- <a
+      href="https://ergohide.com/pages/custom-desk-builder"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      <button class="contact-btn visit-site-btn">View On their website</button>
+    </a> -->
+    <div class="showcase-container">
+      <h1 class="showcase-title">Renders For MEM</h1>
+      <p class="showcase-subtitle">
+        Renders done for MEM, Montreal Memory Center to visualize their design
+      </p>
+
+      <div class="product-grid">
+        <!-- Item 1 -->
+        <div class="grid-item">
+          <img
+            src="assets/media/MEM_Renders/Render 1.png"
+            alt="Headphones Front View"
+            class="grid-image"
+          />
+        </div>
+
+        <!-- Item 2 -->
+        <div class="grid-item">
+          <img
+            src="assets/media/MEM_Renders/Render 2.png"
+            alt="Headphones with Case"
+            class="grid-image"
+          />
+        </div>
+
+        <!-- Item 3 -->
+        <div class="grid-item">
+          <img
+            src="assets/media/MEM_Renders/Render 3.png"
+            alt="Headphones Details"
+            class="grid-image"
+          />
+        </div>
+
+        <!-- Item 4 -->
+        <div class="grid-item">
+          <img
+            src="assets/media/MEM_Renders/Render 4.png"
+            alt="Headphones Black"
+            class="grid-image"
+          />
+        </div>
+
+        <!-- Item 5 -->
+        <div class="grid-item">
+          <img
+            src="assets/media/MEM_Renders/re-5.png"
+            alt="Headphones Controls"
+            class="grid-image"
+          />
+        </div>
+        <div class="grid-item">
+          <img
+            src="assets/media/MEM_Renders/Render 6.png"
+            alt="Headphones Controls"
+            class="grid-image"
+          />
+        </div>
+      </div>
+
+      <div class="review-section">
+        <h2 class="review-title">Client Testimonial</h2>
+        <div class="rating">★★★★★</div>
+        <p class="review-text">
+          "Very fluid communications during the work. Comments were diligently
+          integrated along the process. I totally recommend working with him,
+          and will do again."
+        </p>
+        <div class="reviewer-info">
+          <div class="reviewer-avatar">
+            <img
+              style="width: 100px; background-size: cover; aspect-ratio: 1/1"
+              src="assets/media/mem/memre.jpg"
+              alt="Client Photo"
+            />
+          </div>
+          <div class="reviewer-details">
+            <div class="reviewer-name">Francois Bellehumeur</div>
+            <div class="reviewer-role">Lead Design Manager</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Lightbox script -->
+    <script>
+      (function () {
+        const images = document.querySelectorAll(".grid-image");
+        const overlay = document.createElement("div");
+        overlay.className = "lightbox-overlay";
+        overlay.innerHTML =
+          '<button class="lightbox-close" aria-label="Close">&times;<\/button><img class="lightbox-image" src="" alt="Preview" />';
+        document.body.appendChild(overlay);
+
+        const imgEl = overlay.querySelector(".lightbox-image");
+        const closeBtn = overlay.querySelector(".lightbox-close");
+
+        function open(src, alt) {
+          imgEl.src = src;
+          imgEl.alt = alt || "";
+          overlay.classList.add("open");
+          document.body.style.overflow = "hidden";
+        }
+
+        function close() {
+          overlay.classList.remove("open");
+          document.body.style.overflow = "";
+          imgEl.src = "";
+        }
+
+        images.forEach((img) => {
+          img.style.cursor = "zoom-in";
+          img.addEventListener("click", function () {
+            open(img.currentSrc || img.src, img.alt);
+          });
+        });
+
+        closeBtn.addEventListener("click", close);
+
+        overlay.addEventListener("click", function (e) {
+          if (e.target === overlay) close();
+        });
+
+        document.addEventListener("keydown", function (e) {
+          if (e.key === "Escape") close();
+        });
+      })();
+    </script>
+  </body>
+</html>

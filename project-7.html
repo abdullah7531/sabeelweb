@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Product Showcase | Portfolio</title>
+    <style>
+      .showcase-container {
+        max-width: 1200px;
+        margin: 40px auto;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      }
+
+      .showcase-title {
+        text-align: center;
+        font-size: 32px;
+        font-weight: 700;
+        margin-bottom: 10px;
+        color: #2c3e50;
+      }
+
+      .showcase-subtitle {
+        text-align: center;
+        font-size: 18px;
+        color: #7f8c8d;
+        margin-bottom: 40px;
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .product-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+        margin-bottom: 50px;
+      }
+
+      .grid-item {
+        position: relative;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+        transition: transform 0.3s, box-shadow 0.3s;
+        aspect-ratio: 1 / 1;
+      }
+
+      .grid-item:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 12px 20px rgba(0, 0, 0, 0.12);
+      }
+
+      .grid-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+        transition: transform 0.5s ease;
+      }
+
+      .grid-item:hover .grid-image {
+        transform: scale(1.1);
+      }
+
+      .review-section {
+        background: #f8f9fa;
+        border-radius: 10px;
+        padding: 30px;
+        text-align: center;
+        max-width: 800px;
+        margin: 0 auto;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+      }
+
+      .review-title {
+        font-size: 24px;
+        font-weight: 600;
+        margin-bottom: 20px;
+        color: #2c3e50;
+      }
+
+      .review-text {
+        font-size: 18px;
+        line-height: 1.6;
+        color: #555;
+        margin-bottom: 20px;
+        font-style: italic;
+      }
+
+      .reviewer-info {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 15px;
+      }
+
+      .reviewer-avatar {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        overflow: hidden;
+      }
+
+      .reviewer-avatar img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .reviewer-details {
+        text-align: left;
+      }
+
+      .reviewer-name {
+        font-weight: 600;
+        color: #2c3e50;
+        margin-bottom: 5px;
+      }
+
+      .reviewer-role {
+        color: #7f8c8d;
+        font-size: 14px;
+      }
+
+      .rating {
+        color: #ffc107;
+        font-size: 20px;
+        margin-top: 10px;
+      }
+
+      @media (max-width: 768px) {
+        .product-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+
+      @media (max-width: 480px) {
+        .product-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .showcase-container {
+          padding: 20px;
+        }
+      }
+      /* Image lightbox (popup) styles */
+      .grid-image {
+        cursor: zoom-in;
+      }
+
+      .lightbox-overlay {
+        position: fixed;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(0, 0, 0, 0.85);
+        padding: 20px;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 200ms ease, visibility 200ms ease;
+        z-index: 9999;
+      }
+
+      .lightbox-overlay.open {
+        opacity: 1;
+        visibility: visible;
+      }
+
+      .lightbox-image {
+        max-width: 96%;
+        max-height: 92%;
+        border-radius: 8px;
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+        display: block;
+      }
+
+      .lightbox-close {
+        position: absolute;
+        top: 18px;
+        right: 18px;
+        background: transparent;
+        border: none;
+        color: #fff;
+        font-size: 34px;
+        line-height: 1;
+        cursor: pointer;
+        padding: 6px 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="showcase-container">
+      <!-- <h1 class="showcase-title">Desk configurator 3D Model</h1>
+      <p class="showcase-subtitle">
+        3D model created for ErgoHide's desk configurator to help customers
+        visualize and customize their desks online. Visit their websiite to
+        explore more features of the configurator.
+      </p> -->
+
+      <div class="product-grid">
+        <!-- Item 1 -->
+        <div class="grid-item">
+          <img
+            src="assets/media/Sofa_Visualization_Renders/Chair_Front_Side_Render.png"
+            alt="Headphones Details"
+            class="grid-image"
+          />
+        </div>
+
+        <!-- Item 2 -->
+        <div class="grid-item">
+          <img
+            src="assets/media/Sofa_Visualization_Renders/Chair_Desk_Render_1.png"
+            alt="Headphones with Case"
+            class="grid-image"
+          />
+        </div>
+        <div class="grid-item">
+          <img
+            src="assets/media/Sofa_Visualization_Renders/Chair_Desk_Render_2.png"
+            alt="Headphones Black"
+            class="grid-image"
+          />
+        </div>
+        <!-- Item 3 -->
+
+        <div class="grid-item">
+          <img
+            src="assets/media/Sofa_Visualization_Renders/Chair_Back_Side_Render.png"
+            alt="Headphones Front View"
+            class="grid-image"
+          />
+        </div>
+        <!-- Item 4 -->
+
+        <!-- Item 5 -->
+        <div class="grid-item">
+          <img
+            src="assets/media/Sofa_Visualization_Renders/Desk_Back_Side_Render.png"
+            alt="Headphones Controls"
+            class="grid-image"
+          />
+        </div>
+        <div class="grid-item">
+          <img
+            src="assets/media/Sofa_Visualization_Renders/Desk_Front_Side_Render.png"
+            alt="Headphones Controls"
+            class="grid-image"
+          />
+        </div>
+        <!-- <div class="grid-item">
+          <img
+            src="assets/media/New Folder/Type_2_Floor_2_Bathroom_Render_1.png"
+            alt="Headphones Controls"
+            class="grid-image"
+          />
+        </div>
+        <div class="grid-item">
+          <img
+            src="assets/media/New Folder/Type_2_Floor_2_Bathroom_Render_2.png"
+            alt="Headphones Controls"
+            class="grid-image"
+          />
+        </div> -->
+      </div>
+
+      <div class="review-section">
+        <h2 class="review-title">Client Testimonial</h2>
+        <div class="rating">★★★★★</div>
+        <p class="review-text">"A pleasure to work with. Great quality.."</p>
+        <div class="reviewer-info">
+          <div class="reviewer-avatar">
+            <img
+              src="assets/media/New folder (3)/WhatsApp Image 2025-11-22 at 03.49.52_fb1da915.jpg"
+              alt="Client Photo"
+            />
+          </div>
+          <div class="reviewer-details">
+            <div class="reviewer-name">archivedllc</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Lightbox script -->
+    <script>
+      (function () {
+        const images = document.querySelectorAll(".grid-image");
+        const overlay = document.createElement("div");
+        overlay.className = "lightbox-overlay";
+        overlay.innerHTML =
+          '<button class="lightbox-close" aria-label="Close">&times;<\/button><img class="lightbox-image" src="" alt="Preview" />';
+        document.body.appendChild(overlay);
+
+        const imgEl = overlay.querySelector(".lightbox-image");
+        const closeBtn = overlay.querySelector(".lightbox-close");
+
+        function open(src, alt) {
+          imgEl.src = src;
+          imgEl.alt = alt || "";
+          overlay.classList.add("open");
+          document.body.style.overflow = "hidden";
+        }
+
+        function close() {
+          overlay.classList.remove("open");
+          document.body.style.overflow = "";
+          imgEl.src = "";
+        }
+
+        images.forEach((img) => {
+          img.style.cursor = "zoom-in";
+          img.addEventListener("click", function () {
+            open(img.currentSrc || img.src, img.alt);
+          });
+        });
+
+        closeBtn.addEventListener("click", close);
+
+        overlay.addEventListener("click", function (e) {
+          if (e.target === overlay) close();
+        });
+
+        document.addEventListener("keydown", function (e) {
+          if (e.key === "Escape") close();
+        });
+      })();
+    </script>
+  </body>
+</html>
