@@ -1036,6 +1036,8 @@ footer {
   .about-content {
     grid-template-columns: 1fr;
     gap: 40px;
+    display: flex;
+    flex-direction: column-reverse;
   }
 
   .portfolio-grid {
